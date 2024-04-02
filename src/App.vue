@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        
         <div class="header">
             <h1>Discover</h1>
             <div>
@@ -10,15 +11,18 @@
                 </ul>
             </div>
         </div>
-        <div class="card">
+        
+        <div class="card card-shadow card-one">
             <div class="card-brief">
                 <span class="card-name">Elesh Norn, Mother of Machines</span>
                 <span class="card-type">Legendary Creature — Phyrexian Praetor</span>
             </div>
-            <!-- <img src="../src/assets/Images/FullCards/card-one.jpg" alt="" class="card-image"> -->
         </div>
+        
         <div class="options">
-            Buttons
+            <div class="button"><img src="../src/assets/Images/Icons/unlike.png" alt="" class="btn-dislike"></div>
+            <div class="button"><img src="../src/assets/Images/Icons/star.png" alt="" class="btn-fave"></div>
+            <div class="button"><img src="../src/assets/Images/Icons/heart.png" alt="" class="btn-like"></div>
         </div>
     </div>
 </template>
@@ -28,6 +32,25 @@
 </script>
 
 <style>
+:root {
+    --swamp: rgb(203, 194, 191);
+    --forest: rgb(154, 210, 173);
+    --mountain: rgb(255, 190, 168);
+    --plains: rgb(255, 252, 209);
+    --island: rgb(204, 254, 255);
+    --dark-swamp: #000000;
+    --dark-forest: #2f6a43;
+    --dark-mountain: #E83411;
+    --dark-plains: #8f8a43;
+    --dark-island: #1a6486;
+    --azorius: linear-gradient(var(--plains),var(--island));
+    --boros: linear-gradient(var(--mountain),var(--plains));
+    --dimir: linear-gradient(var(--island),var(--swamp));
+    --rakdos: linear-gradient(to right, var(--dark-swamp),var(--dark-mountain));
+    
+    --plains-shadow: var(--dark-plains);
+}
+
 .container {
     display: grid;
     background-color: white;
@@ -66,13 +89,37 @@
 .card {
     display: flex;
     justify-content: center;
-    background-image: url("../src/assets/Images/FullCards/card-one.jpg");
     background-repeat: no-repeat;
-    background-position: -200px -110px;
-    background-size: 235%;
+    background-position: -210px -119px;
+    background-size: 240%;
     max-width: 100%;
     border-radius: 25px;
     position: relative;
+    /* box-shadow: 0px 4px 5px lightgray; */
+    transform: translate(0);
+    transform-style: preserve-3d;
+}
+
+.card-shadow::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    transform: translate3d(0px, 10px, -1px);
+    background: var(--rakdos);
+    border-radius: inherit;
+    filter: blur(10px);
+}
+
+.card-one {
+    background-image: url("../src/assets/Images/FullCards/card-one.jpg");
+}
+
+.card-two {
+    background-image: url("../src/assets/Images/FullCards/card-two.jpg");
+}
+
+.card-three {
+    background-image: url("../src/assets/Images/FullCards/card-three.jpg");
 }
 
 .card-brief {
@@ -87,6 +134,7 @@
     display: flex;
     flex-direction: column;
     backdrop-filter: blur(3px);
+
     /* width: 90%; */
 }
 
@@ -98,6 +146,43 @@
 .card-type {
     font-size: .8rem;
     font-weight: 300;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /* width: 80%; */
+}
+
+.button {
+    display: flex;
+    box-shadow: 0px 4px 5px lightgray;
+    border-radius: 100%;
+    align-items: center;
+    padding: 1rem;
+}
+
+.button > img {
+    width: 2rem;
+}
+
+.btn-dislike {
+    position: relative;
+    top: 3px;
+    left: 1px;
+}
+
+.btn-fave {
+    position: relative;
+    top: -1px;
+}
+
+.btn-like {
+    position: relative;
+    top: 1px;
+    
 }
 
 
