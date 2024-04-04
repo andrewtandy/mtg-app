@@ -11,11 +11,13 @@
                 </ul>
             </div>
         </div>
-        
-        <div class="card card-shadow card-one">
-            <div class="card-brief">
-                <span class="card-name">Elesh Norn, Mother of Machines</span>
-                <span class="card-type">Legendary Creature — Phyrexian Praetor</span>
+
+        <div class="card-stack">
+            <div class="card" v-for="card in visibleCards" :key="card.id">
+                <div class="card-brief">
+                    <span class="card-name">{{ card.name }}</span>
+                    <span class="card-type">{{ card.type }}</span>
+                </div>              
             </div>
         </div>
         
@@ -27,7 +29,31 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, onMounted, ref } from 'vue';
+import dummyCards from '../src/assets/Data/cards.json'
+import inputAction from '../src/composables/swipe.ts'
+
+const cards = ref(dummyCards)
+// const visibleCards = ref(cards.value.map((card, index) => ({...card, index})).slice(0, 3))
+const visibleCards = computed(() => cards.value.slice(0,3))
+
+const changeOrder = () => {
+    const direction = inputAction(event)
+
+    if(direction === 'right') {
+        const firstCard = cards.value.shift()
+        cards.value.push(firstCard)
+        cards.value = [...cards.value]
+    }
+
+    console.log(cards.value)
+}
+
+onMounted(() => {
+    document.addEventListener('keydown', changeOrder)
+})
+
 
 </script>
 
@@ -59,6 +85,8 @@
     padding: 1rem;
     margin: 0.5rem;
     grid-row-gap: 1rem;
+    position: relative;
+    z-index: -3;
 }
 
 .header {
@@ -86,6 +114,10 @@
     box-shadow: 1px 1px 3px lightgrey;
 }
 
+.card-stack {
+    position: relative;
+}
+
 .card {
     display: flex;
     justify-content: center;
@@ -94,32 +126,46 @@
     background-size: 240%;
     max-width: 100%;
     border-radius: 25px;
-    position: relative;
+    position: absolute;
     /* box-shadow: 0px 4px 5px lightgray; */
     transform: translate(0);
     transform-style: preserve-3d;
+    height: 460px;
+    width: 100%;
 }
 
-.card-shadow::before {
+.card:nth-child(1) {
+    z-index: calc(1 - 1);
+    background-image: v-bind(visibleCards[0].url);
+    /* background-image: url("../src/assets/Images/FullCards/card-one.jpg"); */
+}
+
+/* Top Card Shadow Border */
+.card:nth-child(1)::before {
     content: "";
     position: absolute;
     inset: 5px;
     transform: translate3d(0px, 10px, -1px);
-    background: var(--rakdos);
+    background: v-bind(visibleCards[0].bgColor);
+    /* background: var(--rakdos); */
     border-radius: inherit;
-    filter: blur(10px);
+    filter: blur(12px);
 }
 
-.card-one {
-    background-image: url("../src/assets/Images/FullCards/card-one.jpg");
-}
-
-.card-two {
+.card:nth-child(2) {
+    z-index: calc(1 - 2);
     background-image: url("../src/assets/Images/FullCards/card-two.jpg");
+    transform: rotate(3deg) scale(98%);
+    top: -5px;
+    backdrop-filter: blur(3px);
 }
 
-.card-three {
+.card:nth-child(3) {
+    z-index: calc(1 - 3);
     background-image: url("../src/assets/Images/FullCards/card-three.jpg");
+    transform: rotate(357deg);
+    transform: rotate(357deg) scale(96%);
+    top: -10px;
 }
 
 .card-brief {

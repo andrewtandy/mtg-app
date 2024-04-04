@@ -1,0 +1,44 @@
+[
+    {
+        "id":1,
+        "name":"Elesh Norn, Mother of Machines",
+        "type":"Legendary Creature — Phyrexian Praetor",
+        "url":"url(\"../src/assets/Images/FullCards/card-one.jpg\")",
+        "bgColor": "var(--dark-plains)"
+    },
+    {
+        "id":2,
+        "name":"Rakdos Joins Up",
+        "type":"Legendary Enchantment",
+        "url":"url(\"../src/assets/Images/FullCards/card-two.jpg\")",
+        "bgColor": "linear-gradient(to right, var(--dark-swamp),var(--dark-mountain))"
+    },
+    {
+        "id":3,
+        "name":"Freestrider Commando",
+        "type":"Creature — Centaur Mercenary",
+        "url":"url(\"../src/assets/Images/FullCards/card-three.jpg\")",
+        "bgColor":"#2f6a43"
+    },
+    {
+        "id":4,
+        "name":"Wanted Griffin",
+        "type":"Creature — Griffin",
+        "url":"url(\"../src/assets/Images/FullCards/card-four.jpg\")",
+        "bgColor":"var(--dark-plains)"
+    },
+    {
+        "id":5,
+        "name":"Take the Fall",
+        "type":"Instant",
+        "url":"url(\"../src/assets/Images/FullCards/card-five.jpg\")",
+        "bgColor":"var(--dark-island)"
+    },
+    {
+        "id":6,
+        "name":"Roxanne, Starfall Savant",
+        "type":"Legendary Creature — Cat Druid",
+        "url":"url(\"../src/assets/Images/FullCards/card-six.jpg\")",
+        "bgColor": "linear-gradient(to right, var(--dark-mountain),var(--dark-forest))"
+    }
+]
