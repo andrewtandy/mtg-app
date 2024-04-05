@@ -36,7 +36,15 @@ import inputAction from '../src/composables/swipe.ts'
 
 const cards = ref(dummyCards)
 // const visibleCards = ref(cards.value.map((card, index) => ({...card, index})).slice(0, 3))
-const visibleCards = computed(() => cards.value.slice(0,3))
+let visibleCards = computed(() => cards.value.slice(0,3))
+
+const randomAngle = ref('0deg')
+
+let genRandAngle = function(){
+    const minCeil = Math.ceil(-1);
+    const maxFloor = Math.floor(2)
+    return Math.floor(Math.random() * (maxFloor - minCeil) + minCeil)
+}
 
 const changeOrder = () => {
     const direction = inputAction(event)
@@ -47,7 +55,7 @@ const changeOrder = () => {
         cards.value = [...cards.value]
     }
 
-    console.log(cards.value)
+    randomAngle.value = genRandAngle() + 'deg'
 }
 
 onMounted(() => {
@@ -146,7 +154,7 @@ onMounted(() => {
     position: absolute;
     inset: 5px;
     transform: translate3d(0px, 10px, -1px);
-    background: v-bind(visibleCards[0].bgColor);
+    /* background: v-bind(visibleCards[0].bgColor); */
     /* background: var(--rakdos); */
     border-radius: inherit;
     filter: blur(12px);
@@ -154,17 +162,19 @@ onMounted(() => {
 
 .card:nth-child(2) {
     z-index: calc(1 - 2);
-    background-image: url("../src/assets/Images/FullCards/card-two.jpg");
-    transform: rotate(3deg) scale(98%);
+    background-image: v-bind(visibleCards[1].url);
+    /* background-image: url("../src/assets/Images/FullCards/card-two.jpg"); */
+    transform: rotate(calc(3deg + v-bind(randomAngle))) scale(98%);
     top: -5px;
     backdrop-filter: blur(3px);
 }
 
 .card:nth-child(3) {
     z-index: calc(1 - 3);
-    background-image: url("../src/assets/Images/FullCards/card-three.jpg");
-    transform: rotate(357deg);
-    transform: rotate(357deg) scale(96%);
+    background-image: v-bind(visibleCards[2].url);
+    /* background-image: url("../src/assets/Images/FullCards/card-three.jpg"); */
+    /* transform: rotate(357deg); */
+    transform: rotate(calc(355deg + v-bind(randomAngle))) scale(96%);
     top: -10px;
 }
 
